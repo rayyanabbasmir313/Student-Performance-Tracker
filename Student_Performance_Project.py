@@ -29,6 +29,9 @@ students = [
 
 
 def calculate_average_marks(students):
+    if not students:
+        return None
+
     total_marks = 0
     for student in students:
         total_marks += student['marks']
@@ -37,6 +40,9 @@ def calculate_average_marks(students):
 
 
 def find_top_student(students):
+    if not students:
+        return None
+
     top_student = students[0]
     for student in students:
         if student['marks'] > top_student['marks']:
@@ -117,23 +123,39 @@ def main():
                 continue
             add_student(students, name, age, subjects, marks)
             print(f"Student {name} added successfully.")
+
         elif choice == "3":
             average = calculate_average_marks(students)
-            print(f"Average Marks: {average}")
+
+            if average is None:
+                print("No students available.")
+            else:
+                print(f"Average Marks: {average}")
+
         elif choice == "4":
             top_student = find_top_student(students)
-            print(
-                f"Top Student: {top_student['name']}, Marks: {top_student['marks']}")
+
+            if top_student is None:
+                print("No students available.")
+            else:
+                print(
+                    f"Top Student: {top_student['name']}, Marks: {top_student['marks']}"
+                )
+
         elif choice == "5":
             name = input("Enter student name to search: ")
             print(f"You entered: '{name}'")
+
             for student in students:
                 if student['name'] == name:
                     print(
-                        f"Name: {student['name']}, Age: {student['age']}, Subjects: {student['subjects']}, Marks: {student['marks']}")
+                        f"Name: {student['name']}, Age: {student['age']}, "
+                        f"Subjects: {student['subjects']}, Marks: {student['marks']}"
+                    )
                     break
             else:
                 print("Student not found.")
+
         elif choice == "6":
             print("Feature coming soon. Exiting the program.")
             break
